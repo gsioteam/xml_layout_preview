@@ -1,6 +1,6 @@
 # xml_layout_preview
 
-A preview project for xml_layout.
+A preview project for xml_layout. [Site link](https://gsioteam.github.io/xml_layout_preview/)
 
 ## Customer classes
 
