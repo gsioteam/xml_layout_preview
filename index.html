@@ -61,7 +61,7 @@
 '    <attr:appBar>\n' +
 '        <AppBar>\n' +
 '            <attr:title>\n' +
-'                <Text>Hello World</Text>\n' +
+'                <Text>$title</Text>\n' +
 '            </attr:title>\n' +
 '        </AppBar>\n' +
 '    </attr:appBar>\n' +
@@ -83,7 +83,7 @@
                 lineNumbers: true
             });
             let data = localStorage.getItem('data') || '{\n' +
-        '    "title": "Hello Would",\n' +
+        '    "title": "Hello World",\n' +
         '    "content": ["Xml Layout", "Setup ready!"]\n' +
         '}';
             dataEditor.setValue(data);
