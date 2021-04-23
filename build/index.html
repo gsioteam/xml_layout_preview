@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>XmlLayout Preview</title>
+        <script src="res/codemirror.js"></script>
+        <script src="res/javascript.js"></script>
+        <script src="res/xml.js"></script>
+        <link href="res/bootstrap.css" rel="stylesheet">
+        <link href="res/codemirror.css" rel="stylesheet">
+        <link href="res/colorforth.css" rel="stylesheet">
+        <style>
+            html, body {
+                height: 100%;
+            }
+
+            .input-block {
+                height: 360px;
+            }
+
+            .iframe-box {
+                width: 360px;
+                height: 640px;
+                position: absolute;
+                left: 50%;
+                margin-left: -180px;
+                margin-top: 12px;
+                box-shadow: 1px 1px 8px gray;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-6 h-100">
+                    <div class="border border-2 border-primary">
+                        <textarea id="template-code" class="input-block"></textarea>
+                    </div>
+                    <div class="text-end pt-2 pb-2">
+                        <button class="btn btn-outline-primary" id="submit">
+                            >>
+                        </button>
+                    </div>
+                    <div class="border border-2 border-primary">
+                        <textarea id="data-code"  class="input-block"></textarea>
+                    </div>
+                </div>
+                <div class="col-6 h-100 position-relative">
+                    <iframe class="iframe-box" src="web"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var textarea = document.getElementById("template-code");
+            var templateEditor = CodeMirror.fromTextArea(textarea, {
+                mode: "xml",
+                lineNumbers: true
+            });
+            let temp = localStorage.getItem('template') || '<Scaffold>\n' +
+'    <attr:appBar>\n' +
+'        <AppBar>\n' +
+'            <attr:title>\n' +
+'                <Text>Hello World</Text>\n' +
+'            </attr:title>\n' +
+'        </AppBar>\n' +
+'    </attr:appBar>\n' +
+'    <attr:body>\n' +
+'        <Center>\n' +
+'            <Column mainAxisSize="min">\n' +
+'                <for array="$content">\n' + 
+'                    <Text>$item</Text>\n' +
+'                </for>\n' + 
+'            </Column>\n' +
+'        </Center>\n' +
+'    </attr:body>\n' +
+'</Scaffold>';
+            templateEditor.setValue(temp);
+
+            textarea = document.getElementById("data-code");
+            var dataEditor = CodeMirror.fromTextArea(textarea, {
+                mode: "json",
+                lineNumbers: true
+            });
+            let data = localStorage.getItem('data') || '{\n' +
+        '    "title": "Hello Would",\n' +
+        '    "content": ["Xml Layout", "Setup ready!"]\n' +
+        '}';
+            dataEditor.setValue(data);
+            let iframe = document.getElementsByClassName('iframe-box')[0];
+            document.getElementById('submit').onclick = submit;
+            function submit() {
+                let template = templateEditor.getValue();
+                let data = dataEditor.getValue();
+                localStorage.setItem('template', template);
+                localStorage.setItem('data', data);
+                iframe.contentWindow.postMessage(
+                    {
+                        xml: template,
+                        data: data
+                    }
+                , "*");
+            };
+            iframe.contentWindow.onmessage = function(e) {
+                if (e.data.type === 'ready') {
+                    submit()
+                }
+            };
+        </script>
+    </body>
+</html>
