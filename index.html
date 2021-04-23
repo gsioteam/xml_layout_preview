@@ -79,7 +79,7 @@
 
             textarea = document.getElementById("data-code");
             var dataEditor = CodeMirror.fromTextArea(textarea, {
-                mode: "json",
+                mode: "application/json",
                 lineNumbers: true
             });
             let data = localStorage.getItem('data') || '{\n' +
