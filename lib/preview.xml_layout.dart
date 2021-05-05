@@ -51,6 +51,14 @@ import 'package:flutter/src/painting/box_fit.dart';
 import 'package:flutter/src/painting/decoration_image.dart';
 import 'dart:io';
 import 'package:flutter/src/services/asset_bundle.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/painting/box_decoration.dart';
+import 'package:flutter/src/painting/box_border.dart';
+import 'package:flutter/src/painting/border_radius.dart';
+import 'package:flutter/src/painting/gradient.dart';
+import 'package:flutter/src/painting/box_shadow.dart';
+import 'package:flutter/src/painting/text_span.dart';
+import 'package:flutter/src/widgets/widget_span.dart';
 
 Register register = Register(() {
   XmlLayout.register("MaterialButton", (node, key) {
@@ -995,5 +1003,204 @@ Register register = Register(() {
         widthFactor: node.s<double>("widthFactor"),
         heightFactor: node.s<double>("heightFactor"),
         child: node.child<Widget>());
+  });
+  XmlLayout.register("CustomScrollView", (node, key) {
+    return CustomScrollView(
+        key: key,
+        scrollDirection: node.s<Axis>("scrollDirection", Axis.vertical),
+        reverse: node.s<bool>("reverse", false),
+        controller: node.s<ScrollController>("controller"),
+        primary: node.s<bool>("primary"),
+        physics: node.s<ScrollPhysics>("physics"),
+        shrinkWrap: node.s<bool>("shrinkWrap", false),
+        center: node.s<Key>("center"),
+        anchor: node.s<double>("anchor", 0.0),
+        cacheExtent: node.s<double>("cacheExtent"),
+        slivers: node.children<Widget>(),
+        semanticChildCount: node.s<int>("semanticChildCount"),
+        dragStartBehavior: node.s<DragStartBehavior>(
+            "dragStartBehavior", DragStartBehavior.start),
+        keyboardDismissBehavior: node.s<ScrollViewKeyboardDismissBehavior>(
+            "keyboardDismissBehavior",
+            ScrollViewKeyboardDismissBehavior.manual),
+        restorationId: node.s<String>("restorationId"),
+        clipBehavior: node.s<Clip>("clipBehavior", Clip.hardEdge));
+  });
+  XmlLayout.register("SliverToBoxAdapter", (node, key) {
+    return SliverToBoxAdapter(key: key, child: node.child<Widget>());
+  });
+  XmlLayout.register("SliverGrid", (node, key) {
+    return SliverGrid(
+        key: key,
+        delegate: node.s<SliverChildDelegate>("delegate"),
+        gridDelegate: node.s<SliverGridDelegate>("gridDelegate"));
+  });
+  XmlLayout.register("SliverGrid.count", (node, key) {
+    return SliverGrid.count(
+        key: key,
+        crossAxisCount: node.s<int>("crossAxisCount"),
+        mainAxisSpacing: node.s<double>("mainAxisSpacing", 0.0),
+        crossAxisSpacing: node.s<double>("crossAxisSpacing", 0.0),
+        childAspectRatio: node.s<double>("childAspectRatio", 1.0),
+        children: node.children<Widget>());
+  });
+  XmlLayout.register("SliverGrid.extent", (node, key) {
+    return SliverGrid.extent(
+        key: key,
+        maxCrossAxisExtent: node.s<double>("maxCrossAxisExtent"),
+        mainAxisSpacing: node.s<double>("mainAxisSpacing", 0.0),
+        crossAxisSpacing: node.s<double>("crossAxisSpacing", 0.0),
+        childAspectRatio: node.s<double>("childAspectRatio", 1.0),
+        children: node.children<Widget>());
+  });
+  XmlLayout.register("BoxDecoration", (node, key) {
+    return BoxDecoration(
+        color: node.s<Color>("color"),
+        image: node.s<DecorationImage>("image"),
+        border: node.s<BoxBorder>("border"),
+        borderRadius: node.s<BorderRadiusGeometry>("borderRadius"),
+        boxShadow: node.array<BoxShadow>("boxShadow"),
+        gradient: node.s<Gradient>("gradient"),
+        backgroundBlendMode: node.s<BlendMode>("backgroundBlendMode"),
+        shape: node.s<BoxShape>("shape", BoxShape.rectangle));
+  });
+  XmlLayout.register("DecorationImage", (node, key) {
+    return DecorationImage(
+        image: node.s<ImageProvider<Object>>("image"),
+        onError: node.s<void Function(Object, StackTrace)>("onError"),
+        colorFilter: node.s<ColorFilter>("colorFilter"),
+        fit: node.s<BoxFit>("fit"),
+        alignment: node.s<AlignmentGeometry>("alignment", Alignment.center),
+        centerSlice: node.s<Rect>("centerSlice"),
+        repeat: node.s<ImageRepeat>("repeat", ImageRepeat.noRepeat),
+        matchTextDirection: node.s<bool>("matchTextDirection", false),
+        scale: node.s<double>("scale", 1.0));
+  });
+  XmlLayout.registerInline(ColorFilter, "mode", false, (node, method) {
+    return ColorFilter.mode(
+        node.v<Color>(method[0]), node.v<BlendMode>(method[1]));
+  });
+  XmlLayout.register("ColorFilter.matrix", (node, key) {
+    return ColorFilter.matrix(
+        node.s<List<double>>("arg:0") ?? node.child<List<double>>());
+  });
+  XmlLayout.registerInline(ColorFilter, "linearToSrgbGamma", false,
+      (node, method) {
+    return ColorFilter.linearToSrgbGamma();
+  });
+  XmlLayout.registerInline(ColorFilter, "srgbToLinearGamma", false,
+      (node, method) {
+    return ColorFilter.srgbToLinearGamma();
+  });
+  XmlLayout.registerEnum(BoxShape.values);
+  XmlLayout.register("BoxShadow", (node, key) {
+    return BoxShadow(
+        color: node.s<Color>("color", const Color(4278190080)),
+        offset: node.s<Offset>("offset", Offset.zero),
+        blurRadius: node.s<double>("blurRadius", 0.0),
+        spreadRadius: node.s<double>("spreadRadius", 0.0));
+  });
+  XmlLayout.register("Row", (node, key) {
+    return Row(
+        key: key,
+        mainAxisAlignment: node.s<MainAxisAlignment>(
+            "mainAxisAlignment", MainAxisAlignment.start),
+        mainAxisSize: node.s<MainAxisSize>("mainAxisSize", MainAxisSize.max),
+        crossAxisAlignment: node.s<CrossAxisAlignment>(
+            "crossAxisAlignment", CrossAxisAlignment.center),
+        textDirection: node.s<TextDirection>("textDirection"),
+        verticalDirection: node.s<VerticalDirection>(
+            "verticalDirection", VerticalDirection.down),
+        textBaseline: node.s<TextBaseline>("textBaseline"),
+        children: node.children<Widget>());
+  });
+  XmlLayout.registerInline(EdgeInsets, "fromLTRB", false, (node, method) {
+    return EdgeInsets.fromLTRB(
+        double.tryParse(method[0]),
+        double.tryParse(method[1]),
+        double.tryParse(method[2]),
+        double.tryParse(method[3]));
+  });
+  XmlLayout.registerInline(EdgeInsets, "all", false, (node, method) {
+    return EdgeInsets.all(double.tryParse(method[0]));
+  });
+  XmlLayout.register("EdgeInsets.only", (node, key) {
+    return EdgeInsets.only(
+        left: node.s<double>("left", 0.0),
+        top: node.s<double>("top", 0.0),
+        right: node.s<double>("right", 0.0),
+        bottom: node.s<double>("bottom", 0.0));
+  });
+  XmlLayout.register("EdgeInsets.symmetric", (node, key) {
+    return EdgeInsets.symmetric(
+        vertical: node.s<double>("vertical", 0.0),
+        horizontal: node.s<double>("horizontal", 0.0));
+  });
+  XmlLayout.register("EdgeInsets.fromWindowPadding", (node, key) {
+    return EdgeInsets.fromWindowPadding(
+        node.s<WindowPadding>("arg:0"), node.s<double>("arg:1"));
+  });
+  XmlLayout.registerInline(EdgeInsets, "zero", true, (node, method) {
+    return EdgeInsets.zero;
+  });
+  XmlLayout.registerInline(WindowPadding, "zero", true, (node, method) {
+    return WindowPadding.zero;
+  });
+  XmlLayout.register("Expanded", (node, key) {
+    return Expanded(
+        key: key, flex: node.s<int>("flex", 1), child: node.child<Widget>());
+  });
+  XmlLayout.register("TextSpan", (node, key) {
+    return TextSpan(
+        text: node.s<String>("text"),
+        children: node.children<InlineSpan>(),
+        style: node.s<TextStyle>("style"),
+        recognizer: node.s<GestureRecognizer>("recognizer"),
+        semanticsLabel: node.s<String>("semanticsLabel"));
+  });
+  XmlLayout.register("WidgetSpan", (node, key) {
+    return WidgetSpan(
+        child: node.child<Widget>(),
+        alignment: node.s<PlaceholderAlignment>(
+            "alignment", PlaceholderAlignment.bottom),
+        baseline: node.s<TextBaseline>("baseline"),
+        style: node.s<TextStyle>("style"));
+  });
+  XmlLayout.registerEnum(PlaceholderAlignment.values);
+  XmlLayout.registerInline(BorderRadius, "all", false, (node, method) {
+    return BorderRadius.all(node.v<Radius>(method[0]));
+  });
+  XmlLayout.registerInline(BorderRadius, "circular", false, (node, method) {
+    return BorderRadius.circular(double.tryParse(method[0]));
+  });
+  XmlLayout.register("BorderRadius.vertical", (node, key) {
+    return BorderRadius.vertical(
+        top: node.s<Radius>("top", Radius.zero),
+        bottom: node.s<Radius>("bottom", Radius.zero));
+  });
+  XmlLayout.register("BorderRadius.horizontal", (node, key) {
+    return BorderRadius.horizontal(
+        left: node.s<Radius>("left", Radius.zero),
+        right: node.s<Radius>("right", Radius.zero));
+  });
+  XmlLayout.register("BorderRadius.only", (node, key) {
+    return BorderRadius.only(
+        topLeft: node.s<Radius>("topLeft", Radius.zero),
+        topRight: node.s<Radius>("topRight", Radius.zero),
+        bottomLeft: node.s<Radius>("bottomLeft", Radius.zero),
+        bottomRight: node.s<Radius>("bottomRight", Radius.zero));
+  });
+  XmlLayout.registerInline(BorderRadius, "zero", true, (node, method) {
+    return BorderRadius.zero;
+  });
+  XmlLayout.registerInline(Radius, "circular", false, (node, method) {
+    return Radius.circular(double.tryParse(method[0]));
+  });
+  XmlLayout.registerInline(Radius, "elliptical", false, (node, method) {
+    return Radius.elliptical(
+        double.tryParse(method[0]), double.tryParse(method[1]));
+  });
+  XmlLayout.registerInline(Radius, "zero", true, (node, method) {
+    return Radius.zero;
   });
 });

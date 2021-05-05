@@ -7,6 +7,7 @@ import 'preview.xml_layout.dart' as preview;
 import 'package:xml_layout/types/colors.dart' as colors;
 import 'package:xml_layout/types/icons.dart' as icons;
 import 'dart:html';
+import 'preview.dart' as preview;
 
 void main() {
   preview.register();
@@ -72,8 +73,13 @@ class _MyHomePageState extends State<MyHomePage> {
         });
       }
     });
+    List<String> types = [];
+    for (var type in XmlLayout.registerTypes) {
+      types.add(type);
+    }
     window.postMessage({
-      "type": "ready"
+      "type": "ready",
+      "types": types
     }, "*");
   }
 

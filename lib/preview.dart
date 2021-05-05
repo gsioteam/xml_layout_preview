@@ -10,7 +10,8 @@ const Map<String, String> converts = {
 };
 
 const Map<Type, Type> convertTypes = {
-  EdgeInsetsGeometry: EdgeInsets
+  EdgeInsetsGeometry: EdgeInsets,
+  BorderRadiusGeometry: BorderRadius,
 };
 
 const List<Type> types = [
@@ -24,5 +25,17 @@ const List<Type> types = [
   MaterialButton,
   AppBar,
   Image,
-  Center
+  Center,
+  CustomScrollView,
+  SliverToBoxAdapter,
+  SliverGrid,
+  BoxDecoration,
+  BoxShadow,
+  Row,
+  EdgeInsets,
+  Expanded,
+  TextSpan,
+  WidgetSpan,
+  BorderRadius,
+  Radius,
 ];
