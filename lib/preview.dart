@@ -38,4 +38,5 @@ const List<Type> types = [
   WidgetSpan,
   BorderRadius,
   Radius,
+  ListView,
 ];
