@@ -24,7 +24,7 @@ dependencies:
   build_runner: ^1.11.5
   flutter:
     sdk: flutter
-  xml_layout: ^2.0.2
+  xml_layout: ^2.0.4
 
 dev_dependencies:
   flutter_test:
