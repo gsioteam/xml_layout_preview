@@ -105,13 +105,15 @@ Register register = Register(() {
   });
   XmlLayout.registerEnum(ButtonTextTheme.values);
   XmlLayout.registerInline(Color, "", false, (node, method) {
-    return Color(method[0]);
+    return Color(method[0]?.toInt());
   });
   XmlLayout.registerInline(Color, "fromARGB", false, (node, method) {
-    return Color.fromARGB(method[0], method[1], method[2], method[3]);
+    return Color.fromARGB(method[0]?.toInt(), method[1]?.toInt(),
+        method[2]?.toInt(), method[3]?.toInt());
   });
   XmlLayout.registerInline(Color, "fromRGBO", false, (node, method) {
-    return Color.fromRGBO(method[0], method[1], method[2], method[3]);
+    return Color.fromRGBO(method[0]?.toInt(), method[1]?.toInt(),
+        method[2]?.toInt(), method[3]?.toDouble());
   });
   XmlLayout.registerEnum(Brightness.values);
   XmlLayout.registerInline(EdgeInsetsGeometry, "infinity", true,
@@ -380,7 +382,7 @@ Register register = Register(() {
   });
   XmlLayout.registerEnum(FontStyle.values);
   XmlLayout.registerInline(Locale, "", false, (node, method) {
-    return Locale(method[0], method[1]);
+    return Locale(method[0]?.toString(), method[1]?.toString());
   });
   XmlLayout.register("Locale.fromSubtags", (node, key) {
     return Locale.fromSubtags(
@@ -447,7 +449,7 @@ Register register = Register(() {
   });
   XmlLayout.registerInline(TextHeightBehavior, "fromEncoded", false,
       (node, method) {
-    return TextHeightBehavior.fromEncoded(method[0]);
+    return TextHeightBehavior.fromEncoded(method[0]?.toInt());
   });
   XmlLayout.register("Icon", (node, key) {
     return Icon(node.s<IconData>("arg:0") ?? node.child<IconData>(),
@@ -642,22 +644,22 @@ Register register = Register(() {
   });
   XmlLayout.registerInline(Matrix4, "", false, (node, method) {
     return Matrix4(
-        method[0],
-        method[1],
-        method[2],
-        method[3],
-        method[4],
-        method[5],
-        method[6],
-        method[7],
-        method[8],
-        method[9],
-        method[10],
-        method[11],
-        method[12],
-        method[13],
-        method[14],
-        method[15]);
+        method[0]?.toDouble(),
+        method[1]?.toDouble(),
+        method[2]?.toDouble(),
+        method[3]?.toDouble(),
+        method[4]?.toDouble(),
+        method[5]?.toDouble(),
+        method[6]?.toDouble(),
+        method[7]?.toDouble(),
+        method[8]?.toDouble(),
+        method[9]?.toDouble(),
+        method[10]?.toDouble(),
+        method[11]?.toDouble(),
+        method[12]?.toDouble(),
+        method[13]?.toDouble(),
+        method[14]?.toDouble(),
+        method[15]?.toDouble());
   });
   XmlLayout.register("Matrix4.fromList", (node, key) {
     return Matrix4.fromList(
@@ -687,34 +689,36 @@ Register register = Register(() {
         node.v<Vector4>(method[0]), node.v<Vector4>(method[1]));
   });
   XmlLayout.registerInline(Matrix4, "rotationX", false, (node, method) {
-    return Matrix4.rotationX(method[0]);
+    return Matrix4.rotationX(method[0]?.toDouble());
   });
   XmlLayout.registerInline(Matrix4, "rotationY", false, (node, method) {
-    return Matrix4.rotationY(method[0]);
+    return Matrix4.rotationY(method[0]?.toDouble());
   });
   XmlLayout.registerInline(Matrix4, "rotationZ", false, (node, method) {
-    return Matrix4.rotationZ(method[0]);
+    return Matrix4.rotationZ(method[0]?.toDouble());
   });
   XmlLayout.registerInline(Matrix4, "translation", false, (node, method) {
     return Matrix4.translation(node.v<Vector3>(method[0]));
   });
   XmlLayout.registerInline(Matrix4, "translationValues", false, (node, method) {
-    return Matrix4.translationValues(method[0], method[1], method[2]);
+    return Matrix4.translationValues(
+        method[0]?.toDouble(), method[1]?.toDouble(), method[2]?.toDouble());
   });
   XmlLayout.registerInline(Matrix4, "diagonal3", false, (node, method) {
     return Matrix4.diagonal3(node.v<Vector3>(method[0]));
   });
   XmlLayout.registerInline(Matrix4, "diagonal3Values", false, (node, method) {
-    return Matrix4.diagonal3Values(method[0], method[1], method[2]);
+    return Matrix4.diagonal3Values(
+        method[0]?.toDouble(), method[1]?.toDouble(), method[2]?.toDouble());
   });
   XmlLayout.registerInline(Matrix4, "skewX", false, (node, method) {
-    return Matrix4.skewX(method[0]);
+    return Matrix4.skewX(method[0]?.toDouble());
   });
   XmlLayout.registerInline(Matrix4, "skewY", false, (node, method) {
-    return Matrix4.skewY(method[0]);
+    return Matrix4.skewY(method[0]?.toDouble());
   });
   XmlLayout.registerInline(Matrix4, "skew", false, (node, method) {
-    return Matrix4.skew(method[0], method[1]);
+    return Matrix4.skew(method[0]?.toDouble(), method[1]?.toDouble());
   });
   XmlLayout.registerInline(Matrix4, "fromFloat64List", false, (node, method) {
     return Matrix4.fromFloat64List(node.v<Float64List>(method[0]));
@@ -952,10 +956,12 @@ Register register = Register(() {
   XmlLayout.registerEnum(BoxFit.values);
   XmlLayout.registerEnum(ImageRepeat.values);
   XmlLayout.registerInline(Rect, "fromLTRB", false, (node, method) {
-    return Rect.fromLTRB(method[0], method[1], method[2], method[3]);
+    return Rect.fromLTRB(method[0]?.toDouble(), method[1]?.toDouble(),
+        method[2]?.toDouble(), method[3]?.toDouble());
   });
   XmlLayout.registerInline(Rect, "fromLTWH", false, (node, method) {
-    return Rect.fromLTWH(method[0], method[1], method[2], method[3]);
+    return Rect.fromLTWH(method[0]?.toDouble(), method[1]?.toDouble(),
+        method[2]?.toDouble(), method[3]?.toDouble());
   });
   XmlLayout.register("Rect.fromCircle", (node, key) {
     return Rect.fromCircle(
@@ -978,10 +984,11 @@ Register register = Register(() {
     return Rect.largest;
   });
   XmlLayout.registerInline(Offset, "", false, (node, method) {
-    return Offset(method[0], method[1]);
+    return Offset(method[0]?.toDouble(), method[1]?.toDouble());
   });
   XmlLayout.registerInline(Offset, "fromDirection", false, (node, method) {
-    return Offset.fromDirection(method[0], method[1] ?? 1.0);
+    return Offset.fromDirection(
+        method[0]?.toDouble(), method[1]?.toDouble() ?? 1.0);
   });
   XmlLayout.registerInline(Offset, "zero", true, (node, method) {
     return Offset.zero;
@@ -1108,10 +1115,11 @@ Register register = Register(() {
         children: node.children<Widget>());
   });
   XmlLayout.registerInline(EdgeInsets, "fromLTRB", false, (node, method) {
-    return EdgeInsets.fromLTRB(method[0], method[1], method[2], method[3]);
+    return EdgeInsets.fromLTRB(method[0]?.toDouble(), method[1]?.toDouble(),
+        method[2]?.toDouble(), method[3]?.toDouble());
   });
   XmlLayout.registerInline(EdgeInsets, "all", false, (node, method) {
-    return EdgeInsets.all(method[0]);
+    return EdgeInsets.all(method[0]?.toDouble());
   });
   XmlLayout.register("EdgeInsets.only", (node, key) {
     return EdgeInsets.only(
@@ -1160,7 +1168,7 @@ Register register = Register(() {
     return BorderRadius.all(node.v<Radius>(method[0]));
   });
   XmlLayout.registerInline(BorderRadius, "circular", false, (node, method) {
-    return BorderRadius.circular(method[0]);
+    return BorderRadius.circular(method[0]?.toDouble());
   });
   XmlLayout.register("BorderRadius.vertical", (node, key) {
     return BorderRadius.vertical(
@@ -1183,10 +1191,10 @@ Register register = Register(() {
     return BorderRadius.zero;
   });
   XmlLayout.registerInline(Radius, "circular", false, (node, method) {
-    return Radius.circular(method[0]);
+    return Radius.circular(method[0]?.toDouble());
   });
   XmlLayout.registerInline(Radius, "elliptical", false, (node, method) {
-    return Radius.elliptical(method[0], method[1]);
+    return Radius.elliptical(method[0]?.toDouble(), method[1]?.toDouble());
   });
   XmlLayout.registerInline(Radius, "zero", true, (node, method) {
     return Radius.zero;
